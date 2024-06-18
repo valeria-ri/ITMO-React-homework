@@ -1,22 +1,15 @@
 /* eslint-disable */
 import React, { useState } from "react";
-
-const LANGUAGES = [
-  { label: "English", value: "en" },
-  { label: "Polish", value: "pl" },
-  { label: "Ukrainian", value: "uk" },
-  { label: "German", value: "de" },
-  { label: "French", value: "fr" },
-  { label: "Spanish", value: "es" },
-  { label: "Italian", value: "it" },
-  { label: "Turkish", value: "tr" },
-];
+import { LANGUAGES } from "../utils/constants";
 
 const Languages = ({ language, onLanguageChange }) => {
+  
   if (language === undefined) {
     language = "en";
   }
+
   const languageConfig = LANGUAGES.find((l) => l.value === language);
+  
   if (!languageConfig) {
     throw new Error(`Unknown language code '${language}'`);
   }
@@ -30,7 +23,7 @@ const Languages = ({ language, onLanguageChange }) => {
 
   return (
     <div>
-      <label className="label">Введите язык</label>
+      <label className="label">Выберите язык</label>
       <div className={`dropdown ${open && "is-active"}`}>
         <div className="dropdown-trigger">
           <button className="button" onClick={() => setOpen(!open)}>
