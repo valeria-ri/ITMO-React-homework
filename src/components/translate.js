@@ -1,40 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const doTranslation = async (input, languageCode, cancelToken) => {
-  try {
-    const { data } = await axios.post(
-      "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCf0Xy0OnhxlduyEt3K8zP-sOuu-l_u6uA",
-      {
-        q: input,
-        target: languageCode
-      },
-      { cancelToken: cancelToken.token }
-    );
+const doTranslation = async (input, languageCode) => {
+  let y = 'https://dictionary.yandex.net/api/v1/dicservice.json';
+  let key = 'dict.1.1.20240618T161251Z.027913a470962fd5.6090e53b44429c4d2cbdc246c9247b8f208c510f';
+  let lang = 'ru';
+  let url = `${y}/lookup?key=${key}&lang=${lang}-${languageCode}&text=${input}`;
 
-    return data.data.translations[0].translatedText;
+  try {
+    const { data } = await axios.post(url);
+    return data.def[0].tr[0].text;
   } catch (err) {
-    return "";
+    return '';
   }
 };
 
 export default ({ language, text }) => {
-  const [translated, setTranslated] = useState("");
+  const [translated, setTranslated] = useState('');
 
   useEffect(() => {
     if (!text) {
+      setTranslated('');
       return;
     }
-
-    const cancelToken = axios.CancelToken.source();
-
-    doTranslation(text, language, cancelToken).then(setTranslated);
-
-    return () => {
-      try {
-        cancelToken.cancel();
-      } catch (err) {}
-    };
+    doTranslation(text, language).then(setTranslated);
   }, [text, language]);
 
   return (
