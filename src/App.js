@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Field from "./components/field";
 import Languages from "./components/languages";
 import Translate from "./components/translate";
+import Footer from "./components/footer";
 
 export default function App() {
   const [language, setLanguage] = useState("en");
@@ -14,6 +15,7 @@ export default function App() {
       <Languages language={language} onLanguageChange={setLanguage} />
       <hr />
       <Translate text={text} language={language} />
+      <Footer />
     </div>
   );
 }
