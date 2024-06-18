@@ -14,9 +14,9 @@ const Translate = ({ language, text }) => {
   }, [text, language]);
 
   return (
-    <div>
-      <label className="label">Перевод</label>
-      <h1 className="title">{translated}</h1>
+    <div className="translate">
+      <label className="translate__label label">Перевод</label>
+      <h2 className="translate__result">{translated || '...'}</h2>
     </div>
   );
 };
