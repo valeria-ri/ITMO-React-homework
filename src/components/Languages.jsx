@@ -23,7 +23,7 @@ const Languages = ({ language, onLanguageChange }) => {
 
   return (
     <div className="languages input-row">
-      <label className="languages__label label">Выберите язык</label>
+      <label className="languages__label label">Выберите язык перевода</label>
       <div className={`languages__dropdown dropdown ${open && "is-active"}`}>
         <div className="dropdown-trigger">
           <button className="button" onClick={() => setOpen(!open)}>
